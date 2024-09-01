@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:optiparse/pages/bottomtab.dart';
 import 'package:optiparse/pages/firstview.dart';
+import 'package:optiparse/pages/transactions.dart';
 import './pages/loginview.dart' ;
 import './pages/registerview.dart' ;
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       'register': (context) => const MyRegister(),
       'login': (context) => const LoginPage(),
       'home' : (context) => const MainTabView(),
+      'transactions' : (context) => const TransactionPage(),
     },
     );
   }

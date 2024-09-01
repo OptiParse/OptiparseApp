@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:optiparse/pages/homepage.dart';
-
+import 'package:optiparse/pages/transactions.dart';
 import '../../common/color_extension.dart';
 
 class MainTabView extends StatefulWidget {
@@ -50,7 +50,7 @@ class _MainTabViewState extends State<MainTabView> {
                               onPressed: () {
                                 setState(() {
                                   selectTab = 0;
-                                  currentTabView =  HomePage();
+                                  currentTabView = const HomePage();
                                 });
                               },
                               icon: Image.asset(
@@ -63,7 +63,12 @@ class _MainTabViewState extends State<MainTabView> {
                               ),
                             ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  selectTab = 0;
+                                  currentTabView =  const TransactionPage();
+                                });
+                              },
                               icon: Image.asset(
                                 "assets/img/budgets.png",
                                 width: 20,
