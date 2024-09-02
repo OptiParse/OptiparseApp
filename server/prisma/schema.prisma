@@ -18,14 +18,17 @@ model transaction {
   amount    Float
   createdAt DateTime @default(now())
   merchant  String
+  date DateTime
+  userId    Int?
+  user      user?    @relation(fields: [userId], references: [id])
   // updatedAt DateTime @updatedAt
 }
 
 model user {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  // transactions transaction[]
+  id           Int          @id @default(autoincrement())
+  name         String
+  email        String       @unique
+  password     String
+  createdAt    DateTime     @default(now())
+  transactions transaction[]
 }

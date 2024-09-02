@@ -16,10 +16,20 @@ app.use(cors({
 const port = process.env.PORT || 3000;
 
 const authRoutes = require("./routes/authRoutes.js");
-app.use("/api/auth", authRoutes);
+const userRoutes = require("./routes/userRoutes.js");
+const transactionRoutes = require("./routes/transactionRoutes.js");
+const authenticate = require("./middleware/authenticate.js");
+
 app.get("/", (req, res) => {
   res.send("Welcome Tou Prisma, Express And PSQL Tutorial");
 });
+app.get("/protected", authenticate, (req, res) => {
+  res.status(200).send(`Welcome to the protected route, ${req.user.email}`);
+});
+
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/transaction",authenticate, transactionRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);
