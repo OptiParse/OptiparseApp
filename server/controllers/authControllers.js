@@ -1,10 +1,9 @@
-
-
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { prisma } = require('../db');
 const { findUserByEmail } = require('../services/user.services');
-// create a new user
+const { generateToken } = require('../jwt');
+
+
 const reigsterUser = async (req, res) => {
     const { name, email, password } = req.body;
     let hashedPassword;
@@ -27,7 +26,6 @@ const reigsterUser = async (req, res) => {
             data: {
                 name,
                 email,
-                // password,
                 password: hashedPassword,
             },
         });
@@ -37,7 +35,6 @@ const reigsterUser = async (req, res) => {
     }
 };
 
-// login a user
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -51,7 +48,8 @@ const loginUser = async (req, res) => {
     if (!passwordMatch) {
         return res.status(400).json({ error: 'Invalid credentials' });
     }
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
+    // const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
+    const token = generateToken({ id: user.id, email: user.email })
     res.json({ token });
 };
 module.exports = { reigsterUser,loginUser };
