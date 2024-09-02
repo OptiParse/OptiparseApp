@@ -1,9 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import '../common/color_extension.dart' ;
-import '../common_widget/budgets_row.dart' ;
-import '../common_widget/custom_arc_180_painter.dart' ;
+import '../common/color_extension.dart';
+import '../common_widget/budgets_row.dart';
+import '../common_widget/custom_arc_180_painter.dart';
 import './settings.dart';
+import 'category_page.dart';
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({super.key});
@@ -40,6 +41,73 @@ class _TransactionPageState extends State<TransactionPage> {
     },
   ];
 
+  final nameController = TextEditingController();
+  final budgetController = TextEditingController();
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    nameController.clear();
+    budgetController.clear();
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Add New Category'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Category Name',
+                ),
+              ),
+              TextField(
+                controller: budgetController,
+                decoration: const InputDecoration(
+                  labelText: 'Total Budget',
+                ),
+                keyboardType: TextInputType.number,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final String name = nameController.text.isNotEmpty
+                    ? nameController.text
+                    : 'Unnamed Category';
+                final String budget = budgetController.text.isNotEmpty
+                    ? budgetController.text
+                    : '0.00';
+
+                if (name.isNotEmpty && budget.isNotEmpty) {
+                  setState(() {
+                    budgetArr.add({
+                      "name": name,
+                      "icon": "assets/img/security.png", // Default icon
+                      "spend_amount": "0.00",
+                      "total_budget": budget,
+                      "left_amount": budget,
+                      "color": TColor.gray30 // Default color
+                    });
+                  });
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
@@ -49,60 +117,48 @@ class _TransactionPageState extends State<TransactionPage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 35, right: 10),
-              child: Row(
-                children: [
-                  Spacer(),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SettingsView()));
-                      },
-                      icon: Image.asset("assets/img/settings.png",
-                          width: 25, height: 25, color: TColor.gray30))
-                ],
-              ),
-            ),
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Container(
-                  width: media.width * 0.5,
-                  height: media.width * 0.30,
-                  child: CustomPaint(
-                    painter: CustomArc180Painter(
-                      drwArcs: [
-                        ArcValueModel(color: TColor.secondaryG, value: 20),
-                        ArcValueModel(color: TColor.secondary, value: 45),
-                        ArcValueModel(color: TColor.primary10, value: 70),
-                      ],
-                      end: 50,
-                      width: 12,
-                      bgWidth: 8,
-                    ),
-                  ),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "\$82,90",
-                      style: TextStyle(
-                          color: TColor.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      "of \$2,0000 budget",
-                      style: TextStyle(
-                          color: TColor.gray30,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500),
-                    ),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.06,
+                  bottom: MediaQuery.of(context).size.height * 0.01,
+                  left: MediaQuery.of(context).size.height * 0.01,
+                  right: MediaQuery.of(context).size.height * 0.01),
+              child: SearchAnchor(
+                  builder: (BuildContext context, SearchController controller) {
+                return SearchBar(
+                  controller: controller,
+                  padding: const MaterialStatePropertyAll<EdgeInsets>(
+                      EdgeInsets.symmetric(horizontal: 16.0)),
+                  onTap: () {
+                    controller.openView();
+                  },
+                  onChanged: (_) {
+                    controller.openView();
+                  },
+                  leading: const Icon(Icons.search),
+                  trailing: <Widget>[
+                    Tooltip(
+                      message: 'Filter',
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.filter_alt_outlined),
+                      ),
+                    )
                   ],
-                )
-              ],
+                );
+              }, suggestionsBuilder:
+                      (BuildContext context, SearchController controller) {
+                return List<ListTile>.generate(5, (int index) {
+                  final String item = 'item $index';
+                  return ListTile(
+                    title: Text(item),
+                    onTap: () {
+                      setState(() {
+                        controller.closeView(item);
+                      });
+                    },
+                  );
+                });
+              }),
             ),
             const SizedBox(
               height: 40,
@@ -148,14 +204,23 @@ class _TransactionPageState extends State<TransactionPage> {
 
                   return BudgetsRow(
                     bObj: bObj,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BalanceSection(),
+                        ),
+                      );
+                    },
                   );
                 }),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               child: InkWell(
                 borderRadius: BorderRadius.circular(16),
-                onTap: () {},
+                onTap: () {
+                  _displayTextInputDialog(context);
+                },
                 child: DottedBorder(
                   dashPattern: const [5, 4],
                   strokeWidth: 1,
