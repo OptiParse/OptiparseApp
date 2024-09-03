@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import "./loginview.dart" ;
+import "./loginview.dart";
 
 import '../../common/color_extension.dart';
 import '../../common_widget/primary_button.dart';
@@ -37,7 +37,7 @@ class _FirstViewState extends State<FirstView> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20,80,20,15),
+              padding: const EdgeInsets.fromLTRB(20, 80, 20, 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -55,7 +55,7 @@ class _FirstViewState extends State<FirstView> {
                   PrimaryButton(
                     title: "Login",
                     onPressed: () {
-                      Navigator.pushNamed(context, 'home');
+                      Navigator.pushNamed(context, 'login');
                     },
                   ),
                   const SizedBox(

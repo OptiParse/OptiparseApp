@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:optiparse/pages/homepage.dart';
 import 'package:optiparse/pages/transactions.dart';
 import '../../common/color_extension.dart';
+import 'profile_page.dart';
 
 class MainTabView extends StatefulWidget {
   const MainTabView({super.key});
@@ -14,7 +15,7 @@ class MainTabView extends StatefulWidget {
 class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
   PageStorageBucket pageStorageBucket = PageStorageBucket();
-  Widget currentTabView =  HomePage();
+  Widget currentTabView = HomePage();
 
   @override
   void initState() {
@@ -66,7 +67,7 @@ class _MainTabViewState extends State<MainTabView> {
                               onPressed: () {
                                 setState(() {
                                   selectTab = 0;
-                                  currentTabView =  const TransactionPage();
+                                  currentTabView = const TransactionPage();
                                 });
                               },
                               icon: Image.asset(
@@ -94,7 +95,12 @@ class _MainTabViewState extends State<MainTabView> {
                               ),
                             ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  selectTab = 0;
+                                  currentTabView = const ProfileScreen();
+                                });
+                              },
                               icon: Image.asset(
                                 "assets/img/creditcards.png",
                                 width: 20,
