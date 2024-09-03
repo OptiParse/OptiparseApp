@@ -1,171 +1,249 @@
 import 'package:flutter/material.dart';
+import 'package:optiparse/common/color_extension.dart';
+// import 'package:attendance_app/screens/capturepic.dart';
 
-class MyRegister extends StatefulWidget {
-  const MyRegister({Key? key}) : super(key: key);
+// registration page starts
+
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
 
   @override
-  _MyRegisterState createState() => _MyRegisterState();
+  RegistrationPageState createState() => RegistrationPageState();
 }
 
-class _MyRegisterState extends State<MyRegister> {
+class RegistrationPageState extends State<RegistrationPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var size, height, width;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _positionController = TextEditingController();
+  final TextEditingController _bloodGroupController = TextEditingController();
+  final TextEditingController _employeeIdController = TextEditingController();
+
+  void _nextPage() async {
+    await Navigator.pushNamed(context, '/picture');
+    Navigator.pushNamed(context, '/login');
+    // if (_formKey.currentState?.validate() ?? false) {
+    //   Navigator.of(context).push(
+    //     MaterialPageRoute(
+    //         builder: (context) => CapturePicPage(cameras: widget.cameras)),
+    //   );
+  }
+
+  void _submit() {
+    // submission logic here
+    // upload the data and the captured picture
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/img/register.png'), fit: BoxFit.cover),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        body: Stack(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(left: 35, top: 30),
-              child: const Text(
-                'Create\nAccount',
-                style: TextStyle(color: Colors.white, fontSize: 33),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.28),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 35, right: 35),
-                      child: Column(
-                        children: [
-                          const TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Name",
-                                hintStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                )),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          const TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Email",
-                                hintStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                )),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          const TextField(
-                            style: TextStyle(color: Colors.white),
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                )),
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 27,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: const Color(0xff4c505b),
-                                child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.arrow_forward,
-                                    )),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, 'login');
-                                },
-                                style: const ButtonStyle(),
-                                child: const Text(
-                                  'Sign In',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.white,
-                                      fontSize: 18),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
+    return Scaffold(
+      backgroundColor: TColor.gray,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 30,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/img/app_logo.png",
+                  height: height / 3,
+                  width: double.infinity,
                 ),
-              ),
+                Text(
+                  "Register Here!",
+                  style: TextStyle(
+                      fontFamily: "OpenSans-VariableFont_wdth,wght",
+                      color: TColor.primary,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Text("Register Now for Our Facial Attendance App"),
+                SizedBox(
+                  height: height / 30,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                      color: TColor.gray80,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10))),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        // hintStyle: TextStyle(color: TColor.primary0),
+                        hintText: 'Full Name',
+                        contentPadding: EdgeInsets.all(10)),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                      color: TColor.gray80,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10))),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'E-mail',
+                        contentPadding: EdgeInsets.all(10)),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                      color: TColor.gray80,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10))),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Password',
+                        contentPadding: EdgeInsets.all(10)),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                      color: TColor.gray80,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10))),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Confirm Password',
+                        contentPadding: EdgeInsets.all(10)),
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: TColor.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    onPressed: _nextPage,
+                    child: const Text('Register'),
+                  ),
+                ),
+                // Form(
+                //   key: _formKey,
+                //   child: Column(
+                //       children: [
+                //       TextFormField(
+                //         controller: _employeeIdController,
+                //         decoration: const InputDecoration(labelText: 'Employee ID'),
+                //         validator: (value) {
+                //           if (value == null || value.isEmpty) {
+                //             return 'Please enter your Employee ID';
+                //           }
+                //           return null;
+                //         },
+                //       ),
+                //       SizedBox(
+                //         height: 10,
+                //       ),
+                //       Row(
+                //         children: [
+                //           TextFormField(
+                //             controller: _nameController,
+                //             decoration: const InputDecoration(
+                //               labelText: 'First Name',
+                //                border: OutlineInputBorder(
+                //                 borderRadius: BorderRadius.all(Radius.circular(10))
+                //                )
+                //               ),
+                //             validator: (value) {
+                //               if (value == null || value.isEmpty) {
+                //                 return 'Please enter your Name';
+                //               }
+                //               return null;
+                //             },
+                //           ),
+                //           TextFormField(
+                //             // controller: _nameController,
+                //             decoration: const InputDecoration(
+                //               labelText: 'First Name',
+                //                border: OutlineInputBorder(
+                //                 borderRadius: BorderRadius.all(Radius.circular(10))
+                //                )
+                //               ),
+                //             validator: (value) {
+                //               if (value == null || value.isEmpty) {
+                //                 return 'Please enter your Name';
+                //               }
+                //               return null;
+                //             },
+                //           ),
+                //         ],
+                //       ),
+                //       SizedBox(
+                //         height: 10,
+                //       ),
+                //       TextFormField(
+                //         controller: _ageController,
+                //         decoration: const InputDecoration(labelText: 'Age'),
+                //         validator: (value) {
+                //           if (value == null || value.isEmpty) {
+                //             return 'Please enter your Age';
+                //           }
+                //           return null;
+                //         },
+                //       ),
+                //       TextFormField(
+                //         controller: _positionController,
+                //         decoration: const InputDecoration(labelText: 'Position'),
+                //       ),
+                //       TextFormField(
+                //         controller: _bloodGroupController,
+                //         decoration: const InputDecoration(labelText: 'Blood Group'),
+                //       ),
+                //       const SizedBox(height: 24),
+                //       ElevatedButton(
+                //         onPressed: _nextPage,
+                //         child: const Text('Next'),
+                //       ),
+                //     ],
+
+                //     )
+
+                //   ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
