@@ -63,7 +63,9 @@ class _FirstViewState extends State<FirstView> {
                   ),
                   SecondaryButton(
                     title: "I have an account",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context,'register') ;
+                    },
                   ),
                 ],
               ),
