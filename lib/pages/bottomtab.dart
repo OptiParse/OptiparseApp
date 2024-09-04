@@ -115,7 +115,9 @@ class _MainTabViewState extends State<MainTabView> {
                       ],
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, 'addTransaction');
+                      },
                       child: Container(
                         margin: const EdgeInsets.all(20),
                         decoration: BoxDecoration(boxShadow: [
