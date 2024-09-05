@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:intl/intl.dart';
+import 'package:mrx_charts/mrx_charts.dart';
+
+import '../common/color_extension.dart';
 
 // Dummy class to simulate data structure similar to what was intended with Hive
 class AddData {
@@ -16,7 +21,7 @@ class AddData {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomeState();
@@ -25,10 +30,23 @@ class HomePage extends StatefulWidget {
 class _HomeState extends State<HomePage> {
   // Dummy data for demonstration
   final List<AddData> transactions = [
-    AddData(name: 'Groceries', datetime: DateTime.now(), amount: '\$50', IN: 'Expense'),
-    AddData(name: 'Salary', datetime: DateTime.now(), amount: '\$500', IN: 'Income'),
-    AddData(name: 'Coffee', datetime: DateTime.now(), amount: '\$5', IN: 'Expense'),
-    AddData(name: 'Freelance', datetime: DateTime.now(), amount: '\$150', IN: 'Income'),
+    AddData(
+        name: 'Groceries',
+        datetime: DateTime.now(),
+        amount: '\$50',
+        IN: 'Expense'),
+    AddData(
+        name: 'Salary',
+        datetime: DateTime.now(),
+        amount: '\$500',
+        IN: 'Income'),
+    AddData(
+        name: 'Coffee', datetime: DateTime.now(), amount: '\$5', IN: 'Expense'),
+    AddData(
+        name: 'Freelance',
+        datetime: DateTime.now(),
+        amount: '\$150',
+        IN: 'Income'),
   ];
 
   final List<String> day = [
@@ -44,11 +62,25 @@ class _HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColor.gray, // Match TransactionPage background color
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: SizedBox(height: 340, child: _head()),
+              child: Column(
+                children: [
+                  SizedBox(height: 340, child: _head()),
+                  SizedBox(
+                    height: 200, // Adjust the height as needed
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: Chart(
+                        layers: layers(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -65,8 +97,8 @@ class _HomeState extends State<HomePage> {
               width: double.infinity,
               height: 240,
               decoration: BoxDecoration(
-                color: Color(0xff368983),
-                borderRadius: BorderRadius.only(
+                color: TColor.gray70, // Match TransactionPage color
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
@@ -81,11 +113,13 @@ class _HomeState extends State<HomePage> {
                       child: Container(
                         height: 40,
                         width: 40,
-                        color: Color.fromRGBO(250, 250, 250, 0.1),
+                        color: TColor.gray30
+                            .withOpacity(0.1), // Adjust color to match
                         child: Icon(
                           Icons.notification_add_outlined,
                           size: 30,
-                          color: Colors.white,
+                          color:
+                              TColor.white, // Match TransactionPage icon color
                         ),
                       ),
                     ),
@@ -100,7 +134,8 @@ class _HomeState extends State<HomePage> {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: Color.fromARGB(255, 224, 223, 223),
+                            color: TColor
+                                .white, // Match TransactionPage text color
                           ),
                         ),
                         Text(
@@ -108,7 +143,8 @@ class _HomeState extends State<HomePage> {
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
-                            color: Colors.white,
+                            color: TColor
+                                .white, // Match TransactionPage text color
                           ),
                         ),
                       ],
@@ -128,55 +164,57 @@ class _HomeState extends State<HomePage> {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(47, 125, 121, 0.3),
-                  offset: Offset(0, 6),
+                  color: TColor.gray50.withOpacity(0.3), // Adjust shadow color
+                  offset: const Offset(0, 6),
                   blurRadius: 12,
                   spreadRadius: 6,
                 ),
               ],
-              color: Color.fromARGB(255, 47, 125, 121),
+              color: TColor.gray60, // Match TransactionPage color
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Total Balance',
+                        'Total Expense',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
-                          color: Colors.white,
+                          color:
+                              TColor.white, // Match TransactionPage text color
                         ),
                       ),
                       Icon(
                         Icons.more_horiz,
-                        color: Colors.white,
+                        color: TColor.white, // Match TransactionPage icon color
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Row(
                     children: [
                       Text(
-                        '\$500',  // Dummy total balance value
+                        '\$500', // Dummy total balance value
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
-                          color: Colors.white,
+                          color:
+                              TColor.white, // Match TransactionPage text color
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
@@ -186,20 +224,23 @@ class _HomeState extends State<HomePage> {
                         children: [
                           CircleAvatar(
                             radius: 13,
-                            backgroundColor: Color.fromARGB(255, 85, 145, 141),
+                            backgroundColor:
+                                TColor.primary20, // Match TransactionPage color
                             child: Icon(
-                              Icons.arrow_downward,
-                              color: Colors.white,
+                              Icons.arrow_upward,
+                              color: TColor
+                                  .white, // Match TransactionPage icon color
                               size: 19,
                             ),
                           ),
-                          SizedBox(width: 7),
+                          const SizedBox(width: 7),
                           Text(
-                            'Income',
+                            'This week',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
-                              color: Color.fromARGB(255, 216, 216, 216),
+                              color: TColor
+                                  .white, // Match TransactionPage text color
                             ),
                           ),
                         ],
@@ -208,20 +249,23 @@ class _HomeState extends State<HomePage> {
                         children: [
                           CircleAvatar(
                             radius: 13,
-                            backgroundColor: Color.fromARGB(255, 85, 145, 141),
+                            backgroundColor:
+                                TColor.primary20, // Match TransactionPage color
                             child: Icon(
                               Icons.arrow_upward,
-                              color: Colors.white,
+                              color: TColor
+                                  .white, // Match TransactionPage icon color
                               size: 19,
                             ),
                           ),
-                          SizedBox(width: 7),
+                          const SizedBox(width: 7),
                           Text(
-                            'Expenses',
+                            'This Month',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
-                              color: Color.fromARGB(255, 216, 216, 216),
+                              color: TColor
+                                  .white, // Match TransactionPage text color
                             ),
                           ),
                         ],
@@ -229,36 +273,119 @@ class _HomeState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$500',  // Dummy income value
+                        '\$500', // Dummy income value
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 17,
-                          color: Colors.white,
+                          color:
+                              TColor.white, // Match TransactionPage text color
                         ),
                       ),
                       Text(
-                        '\$50',  // Dummy expenses value
+                        '\$50', // Dummy expenses value
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 17,
-                          color: Colors.white,
+                          color:
+                              TColor.white, // Match TransactionPage text color
                         ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
-        )
+        ),
+        //const Spacer(),
+        // Adjusting the graph position to appear below the card
       ],
     );
+  }
+
+  // Function that returns chart layers
+  List<ChartLayer> layers() {
+    final from = DateTime(2021, 4);
+    final to = DateTime(2021, 8);
+    final frequency =
+        (to.millisecondsSinceEpoch - from.millisecondsSinceEpoch) / 3.0;
+    return [
+      ChartHighlightLayer(
+        shape: () => ChartHighlightLineShape<ChartLineDataItem>(
+          backgroundColor: const Color(0xFF331B6D),
+          currentPos: (item) => item.currentValuePos,
+          radius: const BorderRadius.all(Radius.circular(8.0)),
+          width: 60.0,
+        ),
+      ),
+      ChartAxisLayer(
+        settings: ChartAxisSettings(
+          x: ChartAxisSettingsAxis(
+            frequency: frequency,
+            max: to.millisecondsSinceEpoch.toDouble(),
+            min: from.millisecondsSinceEpoch.toDouble(),
+            textStyle: TextStyle(
+              color: Colors.white.withOpacity(0.6),
+              fontSize: 10.0,
+            ),
+          ),
+          y: ChartAxisSettingsAxis(
+            frequency: 100.0,
+            max: 400.0,
+            min: 0.0,
+            textStyle: TextStyle(
+              color: Colors.white.withOpacity(0.6),
+              fontSize: 10.0,
+            ),
+          ),
+        ),
+        labelX: (value) => DateFormat('MMM')
+            .format(DateTime.fromMillisecondsSinceEpoch(value.toInt())),
+        labelY: (value) => value.toInt().toString(),
+      ),
+      ChartLineLayer(
+        items: List.generate(
+          4,
+          (index) => ChartLineDataItem(
+            x: (index * frequency) + from.millisecondsSinceEpoch,
+            value: Random().nextInt(380) + 20,
+          ),
+        ),
+        settings: const ChartLineSettings(
+          color: Color(0xFF8043F9),
+          thickness: 4.0,
+        ),
+      ),
+      ChartTooltipLayer(
+        shape: () => ChartTooltipLineShape<ChartLineDataItem>(
+          backgroundColor: Colors.white,
+          circleBackgroundColor: Colors.white,
+          circleBorderColor: const Color(0xFF331B6D),
+          circleSize: 4.0,
+          circleBorderThickness: 2.0,
+          currentPos: (item) => item.currentValuePos,
+          onTextValue: (item) => '\$${item.value.toString()}',
+          marginBottom: 6.0,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12.0,
+            vertical: 8.0,
+          ),
+          radius: 6.0,
+          textStyle: const TextStyle(
+            color: Color(0xFF8043F9),
+            letterSpacing: 0.2,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    ];
   }
 }
