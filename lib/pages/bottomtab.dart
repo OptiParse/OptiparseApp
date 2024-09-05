@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:optiparse/pages/homepage.dart';
+import 'package:optiparse/pages/settings.dart';
 import 'package:optiparse/pages/transactions.dart';
 import '../../common/color_extension.dart';
 import 'profile_page.dart';
@@ -84,9 +85,14 @@ class _MainTabViewState extends State<MainTabView> {
                               height: 50,
                             ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  selectTab = 0;
+                                  currentTabView = const SettingsView();
+                                });
+                              },
                               icon: Image.asset(
-                                "assets/img/calendar.png",
+                                "assets/img/settings.png",
                                 width: 20,
                                 height: 20,
                                 color: selectTab == 2
