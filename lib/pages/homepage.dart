@@ -105,32 +105,13 @@ class _HomeState extends State<HomePage> {
               ),
               child: Stack(
                 children: [
-                  Positioned(
-                    top: 35,
-                    left: 340,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        color: TColor.gray30
-                            .withOpacity(0.1), // Adjust color to match
-                        child: Icon(
-                          Icons.notification_add_outlined,
-                          size: 30,
-                          color:
-                              TColor.white, // Match TransactionPage icon color
-                        ),
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 35, left: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Good afternoon',
+                          'Hello!',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
@@ -139,7 +120,7 @@ class _HomeState extends State<HomePage> {
                           ),
                         ),
                         Text(
-                          'Enjelin Morgeana',
+                          'OptiParse User',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,

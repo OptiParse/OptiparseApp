@@ -1,6 +1,7 @@
 import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:optiparse/pages/all_transactions.dart';
 import 'package:optiparse/pages/file_picker.dart';
 
 import 'package:optiparse/pages/homepage.dart';
@@ -20,8 +21,6 @@ class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
   PageStorageBucket pageStorageBucket = PageStorageBucket();
   Widget currentTabView = const HomePage();
-  String _colorName = 'No';
-  Color _color = Colors.black;
 
   @override
   void initState() {
@@ -73,11 +72,11 @@ class _MainTabViewState extends State<MainTabView> {
                               onPressed: () {
                                 setState(() {
                                   selectTab = 0;
-                                  currentTabView = const TransactionPage();
+                                  currentTabView = allTransactions();
                                 });
                               },
                               icon: Image.asset(
-                                "assets/img/budgets.png",
+                                "assets/img/creditcards.png",
                                 width: 20,
                                 height: 20,
                                 color: selectTab == 1
@@ -93,11 +92,11 @@ class _MainTabViewState extends State<MainTabView> {
                               onPressed: () {
                                 setState(() {
                                   selectTab = 0;
-                                  currentTabView = const SettingsView();
+                                  currentTabView = const TransactionPage();
                                 });
                               },
                               icon: Image.asset(
-                                "assets/img/settings.png",
+                                "assets/img/budgets.png",
                                 width: 20,
                                 height: 20,
                                 color: selectTab == 2
@@ -109,11 +108,12 @@ class _MainTabViewState extends State<MainTabView> {
                               onPressed: () {
                                 setState(() {
                                   selectTab = 0;
-                                  currentTabView = const ProfileScreen();
+                                  currentTabView = const SettingsView();
+                                  // ProfileScreen();
                                 });
                               },
                               icon: Image.asset(
-                                "assets/img/creditcards.png",
+                                "assets/img/settings.png",
                                 width: 20,
                                 height: 20,
                                 color: selectTab == 3
@@ -126,49 +126,60 @@ class _MainTabViewState extends State<MainTabView> {
                       ],
                     ),
                     Container(
-                      height: 100,
-                      width: 100,
-                      margin: const EdgeInsets.all(10),
-                      // decoration: BoxDecoration(boxShadow: [
-                      //   BoxShadow(
-                      //       color: TColor.secondary.withOpacity(0.25),
-                      //       blurRadius: 10,
-                      //       offset: const Offset(0, 4))
-                      // ], borderRadius: BorderRadius.circular(50)),
-                      child: CircularMenu(
-                        startingAngleInRadian: 3.66519,
-                        // last item angle
-                        endingAngleInRadian: 5.75959,
-                        toggleButtonSize: 35,
-                        radius: 90,
-                        items: [
-                          CircularMenuItem(
-                              icon: Icons.file_copy_outlined,
-                              color: TColor.gray50,
-                              onTap: () {
-                                print("file picker cliked");
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FilePickerPage()),
-                                );
-                              }),
-                          CircularMenuItem(
-                              icon: Icons.camera_alt,
-                              color: TColor.gray50,
-                              onTap: () {
-                                Navigator.pushNamed(context, 'image_picker');
-                              }),
-                          CircularMenuItem(
-                              icon: Icons.keyboard_alt_outlined,
-                              color: TColor.gray50,
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, 'manual_transaction');
-                              }),
-                        ],
+                      margin: const EdgeInsets.all(20),
+                      height: 60,
+                      width: 55,
+                      child: InkWell(
+                        child: Image.asset("assets/img/center_btn.png"),
+                        onTap: () {
+                          Navigator.pushNamed(context, 'addTransaction');
+                        },
                       ),
                     )
+                    // Container(
+                    //   height: 100,
+                    //   width: 100,
+                    //
+                    //   // decoration: BoxDecoration(boxShadow: [
+                    //   //   BoxShadow(
+                    //   //       color: TColor.secondary.withOpacity(0.25),
+                    //   //       blurRadius: 10,
+                    //   //       offset: const Offset(0, 4))
+                    //   // ], borderRadius: BorderRadius.circular(50)),
+                    //   child: CircularMenu(
+                    //     startingAngleInRadian: 3.66519,
+                    //     // last item angle
+                    //     endingAngleInRadian: 5.75959,
+                    //     toggleButtonSize: 35,
+                    //     radius: 90,
+                    //     items: [
+                    //       CircularMenuItem(
+                    //           icon: Icons.file_copy_outlined,
+                    //           color: TColor.gray50,
+                    //           onTap: () {
+                    //             print("file picker cliked");
+                    //             Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                   builder: (context) => FilePickerPage()),
+                    //             );
+                    //           }),
+                    //       CircularMenuItem(
+                    //           icon: Icons.camera_alt,
+                    //           color: TColor.gray50,
+                    //           onTap: () {
+                    //             Navigator.pushNamed(context, 'image_picker');
+                    //           }),
+                    //       CircularMenuItem(
+                    //           icon: Icons.keyboard_alt_outlined,
+                    //           color: TColor.gray50,
+                    //           onTap: () {
+                    //             Navigator.pushNamed(
+                    //                 context, 'manual_transaction');
+                    //           }),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               )
