@@ -1,6 +1,7 @@
 import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:optiparse/pages/file_picker.dart';
 
 import 'package:optiparse/pages/homepage.dart';
 import 'package:optiparse/pages/settings.dart';
@@ -124,54 +125,6 @@ class _MainTabViewState extends State<MainTabView> {
                         )
                       ],
                     ),
-                    // CircularMenu(
-                    //   //alignment: Alignment.bottomCenter,
-                    //   backgroundWidget: Center(
-                    //     child: RichText(
-                    //       text: TextSpan(
-                    //         style: TextStyle(color: Colors.black, fontSize: 28),
-                    //         children: <TextSpan>[
-                    //           TextSpan(
-                    //             text: _colorName,
-                    //             style: TextStyle(
-                    //                 color: _color, fontWeight: FontWeight.bold),
-                    //           ),
-                    //           TextSpan(text: ' button is clicked.'),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   toggleButtonColor: Colors.pink,
-                    //   items: [
-                    //     CircularMenuItem(
-                    //         icon: Icons.home,
-                    //         color: Colors.green,
-                    //         onTap: () {
-                    //           setState(() {
-                    //             _color = Colors.green;
-                    //             _colorName = 'Green';
-                    //           });
-                    //         }),
-                    //     CircularMenuItem(
-                    //         icon: Icons.search,
-                    //         color: Colors.blue,
-                    //         onTap: () {
-                    //           setState(() {
-                    //             _color = Colors.blue;
-                    //             _colorName = 'Blue';
-                    //           });
-                    //         }),
-                    //     CircularMenuItem(
-                    //         icon: Icons.settings,
-                    //         color: Colors.orange,
-                    //         onTap: () {
-                    //           setState(() {
-                    //             _color = Colors.orange;
-                    //             _colorName = 'Orange';
-                    //           });
-                    //         }),
-                    //   ],
-                    // ),
                     InkWell(
                       onTap: () {
                         // Navigator.pushNamed(context, 'addTransaction');
@@ -187,6 +140,9 @@ class _MainTabViewState extends State<MainTabView> {
                         //       offset: const Offset(0, 4))
                         // ], borderRadius: BorderRadius.circular(50)),
                         child: CircularMenu(
+                          startingAngleInRadian: 3.66519,
+                          // last item angle
+                          endingAngleInRadian: 5.75959,
                           toggleButtonSize: 35,
                           radius: 90,
                           items: [
@@ -194,27 +150,25 @@ class _MainTabViewState extends State<MainTabView> {
                                 icon: Icons.file_copy_outlined,
                                 color: TColor.gray50,
                                 onTap: () {
-                                  setState(() {
-                                    Navigator.pushNamed(context, 'file_picker');
-                                  });
+                                  print("file picker cliked");
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FilePickerPage()),
+                                  );
                                 }),
                             CircularMenuItem(
                                 icon: Icons.camera_alt,
                                 color: TColor.gray50,
                                 onTap: () {
-                                  setState(() {
-                                    Navigator.pushNamed(
-                                        context, 'image_picker');
-                                  });
+                                  Navigator.pushNamed(context, 'image_picker');
                                 }),
                             CircularMenuItem(
                                 icon: Icons.keyboard_alt_outlined,
                                 color: TColor.gray50,
                                 onTap: () {
-                                  setState(() {
-                                    Navigator.pushNamed(
-                                        context, 'manual_transaction');
-                                  });
+                                  Navigator.pushNamed(
+                                      context, 'manual_transaction');
                                 }),
                           ],
                         ),

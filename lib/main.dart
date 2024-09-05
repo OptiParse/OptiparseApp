@@ -13,12 +13,16 @@ import './pages/image_picker.dart';
 import './secured_storage/storage_model.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart';
+import './secured_storage/storage_model.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:logger/logger.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  MyApp({super.key});
   MyApp({super.key});
 
   final logger = Logger();
@@ -29,8 +33,11 @@ class MyApp extends StatelessWidget {
     String? token = await _secureStorage.getToken();
     if (token != null && !JwtDecoder.isExpired(token)) {
       logger.i('Token is not expired');
+      logger.i('Token is not expired');
       return token;
     } else {
+      await _secureStorage.deleteAllStorage();
+      logger.i('Storage cleared');
       await _secureStorage.deleteAllStorage();
       logger.i('Storage cleared');
       return null;
@@ -45,6 +52,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+
+      // home: FilePickerPage(),
       home: FutureBuilder<String?>(
         future: _checkToken(),
         builder: (context, snapshot) {
@@ -54,11 +63,15 @@ class MyApp extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             logger.i('going to main taab view');
+          } else if (snapshot.hasData) {
+            logger.i('going to main taab view');
             return MainTabView();
           } else {
             logger.i('going to First view');
             return MainTabView();
           }
+          logger.i('going to First view');
+          return FirstView();
           logger.i('going to First view');
           return FirstView();
         },
@@ -71,6 +84,8 @@ class MyApp extends StatelessWidget {
         'profile': (context) => const ProfileScreen(),
         'addTransaction': (context) => AddTransaction(),
         'manual_transaction': (context) => ManualTransactionPage(),
+        'file_picker': (context) => FilePickerPage(),
+        'image_picker': (context) => ImagePickerPage(),
         'file_picker': (context) => FilePickerPage(),
         'image_picker': (context) => ImagePickerPage(),
       },
