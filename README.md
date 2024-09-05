@@ -1,5 +1,6 @@
 
 # LedgerLens - Innovate PS-1 - OptiParse
+
 # Server and Deployment
 
 - **Server Framework:** Express
@@ -8,6 +9,7 @@
 - **Hosting:** AWS EC2 Free Tier
 - **Hosted Server Address:** [http://43.204.96.79/](http://43.204.96.79/)
 - **Hosted ML Model Address:** [http://43.204.96.79:8080/](http://43.204.96.79:8080/)
+- **ipynb file** - https://colab.research.google.com/drive/1yBkydFQu57F7nhN07mqUUZkMArpkJfLi?usp=sharing
 
 The server successfully handles login and registration processes, but due to time constraints, the fetch and display transactions are currently hardcoded, even though the necessary routes have been established. Meanwhile, our machine learning model is performing effectively.
 
