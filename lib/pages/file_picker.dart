@@ -11,18 +11,29 @@ class FilePickerPage extends StatefulWidget {
 
 class _FilePickerPageState extends State<FilePickerPage> {
   PlatformFile? _file; // Holds the selected file
+  final int _maxFileSize = 5242880; // Maximum file size (5MB)
 
   // Method to pick a file
   void _pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
-      withData: true, // Get file bytes if possible
+      withData:
+          false, // Do not get file bytes to avoid loading large files into memory
     );
 
     if (result != null) {
-      setState(() {
-        _file = result.files.first;
-      });
+      PlatformFile selectedFile = result.files.first;
+
+      // Check if the file size exceeds the maximum allowed size
+      if (selectedFile.size > _maxFileSize) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('File size exceeds the 5MB limit.')),
+        );
+      } else {
+        setState(() {
+          _file = selectedFile;
+        });
+      }
     }
   }
 
@@ -36,9 +47,7 @@ class _FilePickerPageState extends State<FilePickerPage> {
   // Request storage permissions before opening the file
   Future<void> _requestPermissions() async {
     PermissionStatus status = await Permission.storage.request();
-    if (status.isGranted) {
-      // Proceed with file actions if permission is granted
-    } else {
+    if (!status.isGranted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Storage permission is required to open files')),
       );
@@ -51,14 +60,25 @@ class _FilePickerPageState extends State<FilePickerPage> {
       String ext = _file!.extension ?? '';
       if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].contains(ext)) {
         // Image preview
-        return _file!.bytes != null
-            ? Image.memory(
-                _file!.bytes!,
+        return FutureBuilder(
+          future: _file!.bytes != null
+              ? Future.value(_file!.bytes!)
+              : Future.value(null),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData) {
+              return Image.memory(
+                snapshot.data!,
                 height: MediaQuery.of(context).size.height /
                     2, // Half screen height
                 fit: BoxFit.cover,
-              )
-            : Text('Unable to load image.');
+              );
+            } else if (snapshot.hasError) {
+              return Text('Unable to load image.');
+            }
+            return CircularProgressIndicator();
+          },
+        );
       } else if (ext == 'pdf') {
         // PDF file preview placeholder
         return Center(
@@ -145,7 +165,7 @@ class _FilePickerPageState extends State<FilePickerPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _file == null // Show upload button only if no file is selected
+            _file == null // Show pick file button only if no file is selected
                 ? ElevatedButton(
                     onPressed: _pickFile,
                     child: Text('Pick File'),
@@ -153,7 +173,7 @@ class _FilePickerPageState extends State<FilePickerPage> {
                 : Container(),
             SizedBox(height: 20),
             if (_file !=
-                null) // Display cross icon and preview section if a file is selected
+                null) // Display preview and upload button if a file is selected
               Column(
                 children: [
                   // Cross icon to delete the selected file

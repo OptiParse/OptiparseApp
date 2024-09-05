@@ -10,13 +10,25 @@ class ImagePickerPage extends StatefulWidget {
 
 class _ImagePickerPageState extends State<ImagePickerPage> {
   final ImagePicker _picker = ImagePicker();
-  XFile?
-      _image; // Hold a single image (since capture button hides after one capture)
+  XFile? _image; // Hold a single image
+  final int _maxFileSize = 5 * 1024 * 1024; // Max file size set to 5 MB
 
   // Method to capture images
   void _captureImage() async {
     XFile? image = await _picker.pickImage(source: ImageSource.camera);
+
     if (image != null) {
+      final File file = File(image.path);
+      final int fileSize = await file.length();
+
+      // Check if the file size exceeds the limit
+      if (fileSize > _maxFileSize) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Image exceeds the 5 MB size limit.')),
+        );
+        return; // Return without setting the image if it exceeds the size limit
+      }
+
       setState(() {
         _image = image;
       });
@@ -28,6 +40,23 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     setState(() {
       _image = null; // Reset the selected image
     });
+  }
+
+  // Method to open the selected image
+  Future<void> _viewImage() async {
+    if (_image != null) {
+      final File file = File(_image!.path);
+      // Display the image in a full-screen modal
+      showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: Image.file(
+            file,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
   }
 
   // Simulate the image upload process
@@ -80,13 +109,16 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                     ),
                   ),
                   // Image preview (centered and covers half the screen)
-                  Container(
-                    alignment: Alignment.center,
-                    height: MediaQuery.of(context).size.height /
-                        2, // Half screen height
-                    child: Image.file(
-                      File(_image!.path),
-                      fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: _viewImage, // View full-size image on tap
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: MediaQuery.of(context).size.height /
+                          2, // Half screen height
+                      child: Image.file(
+                        File(_image!.path),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
