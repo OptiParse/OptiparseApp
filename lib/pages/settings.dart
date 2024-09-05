@@ -139,7 +139,7 @@ class _SettingsViewState extends State<SettingsView> {
                     ),
                     child: Column(
                       children: [
-                        IconItemRow(
+                        const IconItemRow(
                           title: "Security",
                           icon: "assets/img/face_id.png",
                           value: "FaceID",
@@ -157,7 +157,6 @@ class _SettingsViewState extends State<SettingsView> {
                       ],
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 8),
                     child: Text(
@@ -177,30 +176,26 @@ class _SettingsViewState extends State<SettingsView> {
                       color: TColor.gray60.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
                         IconItemRow(
                           title: "Sorting",
                           icon: "assets/img/sorting.png",
                           value: "Date",
                         ),
-
                         IconItemRow(
                           title: "Summary",
                           icon: "assets/img/chart.png",
                           value: "Average",
                         ),
-
                         IconItemRow(
                           title: "Default currency",
                           icon: "assets/img/money.png",
                           value: "USD (\$)",
                         ),
-                        
                       ],
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 8),
                     child: Text(
@@ -220,7 +215,7 @@ class _SettingsViewState extends State<SettingsView> {
                       color: TColor.gray60.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
                         IconItemRow(
                           title: "App icon",
@@ -237,7 +232,6 @@ class _SettingsViewState extends State<SettingsView> {
                           icon: "assets/img/font.png",
                           value: "Inter",
                         ),
-                        
                       ],
                     ),
                   ),
