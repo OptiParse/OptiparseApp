@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import "./loginview.dart";
 
 import '../../common/color_extension.dart';
 import '../../common_widget/primary_button.dart';
@@ -63,9 +62,7 @@ class _FirstViewState extends State<FirstView> {
                   ),
                   SecondaryButton(
                     title: "I have an account",
-                    onPressed: () {
-                      Navigator.pushNamed(context,'register') ;
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),

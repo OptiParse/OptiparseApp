@@ -21,7 +21,7 @@ class AddData {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomeState();
@@ -70,7 +70,7 @@ class _HomeState extends State<HomePage> {
               child: Column(
                 children: [
                   SizedBox(height: 340, child: _head()),
-                  Container(
+                  SizedBox(
                     height: 200, // Adjust the height as needed
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -98,7 +98,7 @@ class _HomeState extends State<HomePage> {
               height: 240,
               decoration: BoxDecoration(
                 color: TColor.gray70, // Match TransactionPage color
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
@@ -165,7 +165,7 @@ class _HomeState extends State<HomePage> {
               boxShadow: [
                 BoxShadow(
                   color: TColor.gray50.withOpacity(0.3), // Adjust shadow color
-                  offset: Offset(0, 6),
+                  offset: const Offset(0, 6),
                   blurRadius: 12,
                   spreadRadius: 6,
                 ),
@@ -175,7 +175,7 @@ class _HomeState extends State<HomePage> {
             ),
             child: Column(
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
@@ -197,7 +197,7 @@ class _HomeState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Row(
@@ -214,7 +214,7 @@ class _HomeState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
@@ -233,7 +233,7 @@ class _HomeState extends State<HomePage> {
                               size: 19,
                             ),
                           ),
-                          SizedBox(width: 7),
+                          const SizedBox(width: 7),
                           Text(
                             'This week',
                             style: TextStyle(
@@ -258,7 +258,7 @@ class _HomeState extends State<HomePage> {
                               size: 19,
                             ),
                           ),
-                          SizedBox(width: 7),
+                          const SizedBox(width: 7),
                           Text(
                             'This Month',
                             style: TextStyle(
@@ -273,7 +273,7 @@ class _HomeState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(

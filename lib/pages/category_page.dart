@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../common/color_extension.dart';
 
 class BalanceSection extends StatelessWidget {
+  const BalanceSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,141 +13,145 @@ class BalanceSection extends StatelessWidget {
         slivers: [
           SliverAppBar(
             backgroundColor: TColor.gray,
-            expandedHeight: MediaQuery.of(context).size.height * 0.40,
+            expandedHeight: MediaQuery.of(context).size.height * 0.30,
             pinned: false,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               background: Container(
-                padding: EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 40.0),
                 alignment: Alignment.center,
                 color: TColor.gray,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Category Name',
                       style: TextStyle(
-                        fontSize: 36.0,
+                        fontSize: 30.0,
                         color: Colors.white,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Text(
                       'Total: \$15000',
                       style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white70,
-                      ),
+                          fontSize: 18.0,
+                          color: TColor.gray30,
+                          fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(height: 30.0),
-                    Column(
-                      children: [
-                        SizedBox(height: 25),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 13,
-                                    backgroundColor: TColor
-                                        .primary20, // Match TransactionPage color
-                                    child: Icon(
-                                      Icons.arrow_upward,
-                                      color: TColor
-                                          .white, // Match TransactionPage icon color
-                                      size: 19,
+                    //const SizedBox(height: 20.0),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 8),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 25),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 13,
+                                      backgroundColor: TColor
+                                          .primary20, // Match TransactionPage color
+                                      child: Icon(
+                                        Icons.arrow_upward,
+                                        color: TColor
+                                            .white, // Match TransactionPage icon color
+                                        size: 19,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 7),
-                                  Text(
-                                    'Today',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: TColor
-                                          .gray30, // Match TransactionPage text color
+                                    const SizedBox(width: 7),
+                                    Text(
+                                      'Today',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        color: TColor
+                                            .white, // Match TransactionPage text color
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 13,
-                                    backgroundColor: TColor
-                                        .primary20, // Match TransactionPage color
-                                    child: Icon(
-                                      Icons.arrow_upward,
-                                      color: TColor
-                                          .white, // Match TransactionPage icon color
-                                      size: 19,
-                                    ),
-                                  ),
-                                  SizedBox(width: 7),
-                                  Text(
-                                    'This week',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: TColor
-                                          .gray30, // Match TransactionPage text color
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                '\$5', // Dummy income value
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: TColor
-                                      .white, // Match TransactionPage text color
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                '\$500', // Dummy income value
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: TColor
-                                      .white, // Match TransactionPage text color
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 13,
+                                      backgroundColor: TColor
+                                          .primary20, // Match TransactionPage color
+                                      child: Icon(
+                                        Icons.arrow_upward,
+                                        color: TColor
+                                            .white, // Match TransactionPage icon color
+                                        size: 19,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 7),
+                                    Text(
+                                      'This week',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        color: TColor
+                                            .white, // Match TransactionPage text color
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        )
-                      ],
+                          const SizedBox(height: 6),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  '\$5', // Dummy income value
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                    color: TColor
+                                        .gray30, // Match TransactionPage text color
+                                  ),
+                                ),
+                                Text(
+                                  '\$500', // Dummy income value
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                    color: TColor
+                                        .gray30, // Match TransactionPage text color
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             bottom: PreferredSize(
-                preferredSize: Size.fromHeight(0),
+                preferredSize: const Size.fromHeight(0),
                 child: Container(
-                  child: SizedBox(
-                    height: 20,
-                  ),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
+                  ),
+                  child: SizedBox(
+                    height: 20,
                   ),
                 )),
           ),
@@ -154,12 +160,12 @@ class BalanceSection extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: TColor.gray80,
-                  borderRadius: BorderRadius.vertical(
+                  borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(30.0),
                   ),
                 ),
-                padding: EdgeInsets.all(20.0),
-                child: Column(
+                padding: const EdgeInsets.all(20.0),
+                child: const Column(
                   children: [
                     TransactionItem(
                         title: 'Adobe Collection',
@@ -258,6 +264,7 @@ class TransactionItem extends StatelessWidget {
   //final bool isPositive;
 
   const TransactionItem({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.amount,
@@ -275,7 +282,7 @@ class TransactionItem extends StatelessWidget {
           radius: 15.0,
           backgroundColor: TColor.primary20,
           //isPositive ? Colors.green : Colors.red,
-          child: Icon(
+          child: const Icon(
             Icons.arrow_upward,
 
             //isPositive ? Icons.arrow_upward : Icons.arrow_downward,
@@ -286,25 +293,29 @@ class TransactionItem extends StatelessWidget {
           title,
           style: TextStyle(
             color: TColor.white,
-            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: TextStyle(color: TColor.white, fontSize: 10),
+          style: TextStyle(
+              color: TColor.gray30, fontSize: 11, fontWeight: FontWeight.w500),
         ),
         trailing: Column(
           children: [
             Text(
               amount,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
                 color: Colors.red,
                 // isPositive ? Colors.green : Colors.red,
               ),
             ),
             Text(date,
                 style: TextStyle(
+                  fontSize: 10,
                   color: TColor.white,
                 ))
           ],
