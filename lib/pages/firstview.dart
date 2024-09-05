@@ -24,7 +24,6 @@ class _FirstViewState extends State<FirstView> {
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 12, 38, 62),
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
@@ -62,7 +61,9 @@ class _FirstViewState extends State<FirstView> {
                   ),
                   SecondaryButton(
                     title: "I have an account",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'register');
+                    },
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../common/color_extension.dart';
 
 class ManualTransactionPage extends StatefulWidget {
   @override
@@ -22,14 +23,19 @@ class _ManualTransactionPageState extends State<ManualTransactionPage> {
     receiptController.dispose();
     dateController.dispose();
     super.dispose();
-    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColor.gray,
       appBar: AppBar(
-        title: Text('Add Manual Transaction'),
+        backgroundColor: TColor.gray,
+        title: Text(
+          'Add Manual Transaction',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,6 +44,8 @@ class _ManualTransactionPageState extends State<ManualTransactionPage> {
             TextField(
               controller: merchantController,
               decoration: InputDecoration(labelText: 'Merchant Name'),
+            
+
             ),
             TextField(
               controller: priceController,
@@ -89,4 +97,3 @@ class _ManualTransactionPageState extends State<ManualTransactionPage> {
     );
   }
 }
-
