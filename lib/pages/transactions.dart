@@ -52,6 +52,7 @@ class _TransactionPageState extends State<TransactionPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: TColor.gray10,
           title: const Text('Add New Category'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
