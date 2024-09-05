@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:optiparse/pages/all_transactions.dart';
 import '../common/color_extension.dart';
 import '../common_widget/budgets_row.dart';
 import '../common_widget/custom_arc_180_painter.dart';
@@ -126,7 +127,7 @@ class _TransactionPageState extends State<TransactionPage> {
                   builder: (BuildContext context, SearchController controller) {
                 return SearchBar(
                   controller: controller,
-                  padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  padding: const WidgetStatePropertyAll<EdgeInsets>(
                       EdgeInsets.symmetric(horizontal: 16.0)),
                   onTap: () {
                     controller.openView();
@@ -160,14 +161,34 @@ class _TransactionPageState extends State<TransactionPage> {
                 });
               }),
             ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  'Expenses',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: TColor.primary0,
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: InkWell(
                 borderRadius: BorderRadius.circular(16),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => allTransactions(),
+                    ),
+                  );
+                },
                 child: Container(
                   height: 64,
                   padding: const EdgeInsets.all(10),
@@ -182,7 +203,7 @@ class _TransactionPageState extends State<TransactionPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Your budgets are on tack 👍",
+                        "Show all transactions",
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 14,

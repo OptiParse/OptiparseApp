@@ -51,6 +51,8 @@ dependencies:
   open_filex: ^4.0.0
   permission_handler: ^10.4.1
 
+  circular_menu: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

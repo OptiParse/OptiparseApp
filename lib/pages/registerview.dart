@@ -62,7 +62,7 @@ class RegistrationPageState extends State<RegistrationPage> {
     final String email = _emailController.text;
 
     final response = await http.post(
-      Uri.parse('http://172.23.21.80:3000/api/auth/signup'),
+      Uri.parse('http://43.204.96.79/api/auth/signup'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -83,7 +83,8 @@ class RegistrationPageState extends State<RegistrationPage> {
       });
     } else {
       setState(() {
-        _message = 'Registration failed: ${json.decode(response.body)['error']}';
+        _message =
+            'Registration failed: ${json.decode(response.body)['error']}';
       });
     }
 
@@ -129,10 +130,14 @@ class RegistrationPageState extends State<RegistrationPage> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12),
                         color: TColor.gray80,
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                       ),
                       child: TextField(
                         controller: _nameController,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Full Name',
@@ -145,10 +150,14 @@ class RegistrationPageState extends State<RegistrationPage> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12),
                         color: TColor.gray80,
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                       ),
                       child: TextField(
                         controller: _emailController,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'E-mail',
@@ -161,10 +170,14 @@ class RegistrationPageState extends State<RegistrationPage> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12),
                         color: TColor.gray80,
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                       ),
                       child: TextField(
                         controller: _passwordController,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Password',
@@ -178,9 +191,9 @@ class RegistrationPageState extends State<RegistrationPage> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12),
                         color: TColor.gray80,
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                       ),
-                      
                     ),
                     const SizedBox(height: 40),
                     SizedBox(
@@ -210,8 +223,8 @@ class RegistrationPageState extends State<RegistrationPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: (){
-                          Navigator.pushNamed(context, 'login') ;
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'login');
                         },
                         child: const Text('Back to Login'),
                       ),

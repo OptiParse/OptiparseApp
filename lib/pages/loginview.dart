@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://172.23.21.80:3000/api/auth/login'), // Replace with your IP address
+        Uri.parse('http://43.204.96.79/api/auth/login'), // Replace with your IP address
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -165,6 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                             child: Container(
                               alignment: Alignment.centerLeft,
                               child: TextField(
+                                style: const TextStyle(
+                                  color : Colors.white,
+                                ),
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(
                                     fontSize: 15,
@@ -202,6 +205,9 @@ class _LoginPageState extends State<LoginPage> {
                             child: Container(
                               alignment: Alignment.centerLeft,
                               child: TextField(
+                                 style: const TextStyle(
+                                  color : Colors.white,
+                                ),
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(
                                     fontSize: 15,

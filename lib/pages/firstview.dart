@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import "./loginview.dart";
 
 import '../../common/color_extension.dart';
 import '../../common_widget/primary_button.dart';

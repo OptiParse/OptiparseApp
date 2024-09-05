@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                                 // ),
                                 color: TColor.border.withOpacity(0.1),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                    const BorderRadius.all(Radius.circular(10)),
                               ),
                               child: TextField(
                                 readOnly: true,
@@ -202,7 +202,7 @@ class ProfileScreen extends StatelessWidget {
                                 // ),
                                 color: TColor.border.withOpacity(0.1),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                    const BorderRadius.all(Radius.circular(10)),
                               ),
                               child: TextField(
                                 readOnly: true,
@@ -237,7 +237,7 @@ class ProfileScreen extends StatelessWidget {
                                 // ),
                                 color: TColor.border.withOpacity(0.1),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                    const BorderRadius.all(Radius.circular(10)),
                               ),
                               child: TextField(
                                 readOnly: true,
