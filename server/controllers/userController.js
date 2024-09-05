@@ -5,26 +5,26 @@ const { findUserByEmail } = require('../services/user.services');
 
 require('dotenv').config();
 
-const makeTransaction = async (req, res) => {
-    try {
-        const { amount, description } = req.body;
-        const user = req.user;
-        const transaction = await prisma.transaction.create({
-            data: {
-                amount,
-                description,
-                user: {
-                    connect: {
-                        id: user.id,
-                    },
-                },
-            },
-        });
-        res.json(transaction);
-    }   catch (error) {
-        res.status(500).json({ error: 'Failed to create transaction' });
-    }
-}
+// const makeTransaction = async (req, res) => {
+//     try {
+//         const { amount, description } = req.body;
+//         const user = req.user;
+//         const transaction = await prisma.transaction.create({
+//             data: {
+//                 amount,
+//                 description,
+//                 user: {
+//                     connect: {
+//                         id: user.id,
+//                     },
+//                 },
+//             },
+//         });
+//         res.json(transaction);
+//     }   catch (error) {
+//         res.status(500).json({ error: 'Failed to create transaction' });
+//     }
+// }
 
 // Get all users
 const getUsers = async (req, res) => {

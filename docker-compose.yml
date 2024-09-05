@@ -1,14 +1,31 @@
-version: '3.8'
+version: '3.9'
 services:
+  server:
+    container_name: server
+    image: server
+    build:
+      context: ./server
+      dockerfile: server.dockerfile
+    platform: linux/amd64
+    ports:
+      - 4000:4000
+    environment:
+      - PORT=4000
+      - DATABASE_URL=postgresql://postgres:123456@postgres:5432/postgres?schema=public
+      - JWT_SECRET=iMyPrivateJwtSecret
+      - JWT_TOKEN_EXPIRATION=1d
+
   postgres:
-    image: postgres:10.3
+    container_name: db
+    image: postgres:latest
+    platform: linux/amd64
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=postgres
     volumes:
       - postgres:/var/lib/postgresql/data
-    ports:
-      - '5433:5432'
+
 volumes:
   postgres:
